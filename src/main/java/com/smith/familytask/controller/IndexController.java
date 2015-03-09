@@ -15,25 +15,6 @@ public class IndexController {
     @RequestMapping
     @ResponseBody
     public String index() {
-        return "guestbookasdasdasd111asd";
+        return "That's public api for 'Family Task' service.";
     }
-
-    @RequestMapping(value = "test", method = RequestMethod.GET)
-//    @ResponseBody
-    public String test() {
-        return "test";
-    }
-
-    @RequestMapping("poke")
-    @ResponseBody
-    public String poke() {
-        return "Poke poke";
-    }
-
-    @RequestMapping("poke1")
-    @ResponseBody
-    public String pokeMe() {
-        return "Poke poke1111";
-    }
-
 }

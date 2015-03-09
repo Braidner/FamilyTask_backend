@@ -1,14 +1,29 @@
 package com.smith.familytask.model;
 
+import org.hibernate.annotations.*;
+
 import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.util.Date;
 
 /**
  * @author Nick Smith
  */
 @Entity
+@FilterDefs({
+        @FilterDef(name = Task.ASSIGNEE_FILTER, parameters = @ParamDef(name = "id", type = "long")),
+        @FilterDef(name = Task.UPDATE_FILTER, parameters = @ParamDef(name = "updateDate", type = "date"))
+})
+@Filters({
+        @Filter(name = Task.ASSIGNEE_FILTER, condition = "assignee.id = :id"),
+        @Filter(name = Task.UPDATE_FILTER, condition = "updateDate > :date")
+})
 @Table(name = "t_task")
 public class Task {
+
+    public static final String ASSIGNEE_FILTER = "assigneeFilter";
+    public static final String UPDATE_FILTER = "updateFilter";
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
