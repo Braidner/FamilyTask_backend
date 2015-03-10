@@ -14,5 +14,11 @@ import java.util.List;
 public interface TaskRepository {
     void createTask(Task task);
 
+    /**
+     * Поиск всех задач пользователя
+     * @param id - ид назначенного на задачу пользьвателя
+     * @param date - с какой даты загружать задачи
+     * @return список задач
+     */
     List<Task> findTasks(Long id, Date date);
 }

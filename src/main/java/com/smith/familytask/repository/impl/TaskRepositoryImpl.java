@@ -20,12 +20,7 @@ public class TaskRepositoryImpl extends HibernateSupport implements TaskReposito
         openSession().save(task);
     }
 
-    /**
-     * Поиск всех задач пользователя
-     * @param id - ид назначенного на задачу пользьвателя
-     * @param date - с какой даты загружать задачи
-     * @return список задач
-     */
+
     @Override
     public List<Task> findTasks(Long id, Date date) {
         openSession().enableFilter(Task.ASSIGNEE_FILTER).setParameter("id", id);
