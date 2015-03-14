@@ -1,11 +1,14 @@
 package com.smith.familytask.controller.rest;
 
+import com.smith.familytask.controller.AbstractController;
 import com.smith.familytask.model.Task;
 import com.smith.familytask.model.User;
 import com.smith.familytask.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -16,12 +19,11 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("rest/tasks")
-public class TaskController {
+public class TaskController extends AbstractController {
 
     @Autowired
     private TaskRepository taskRepository;
 
-    private User currentUser;
 
     @RequestMapping("test")
     public String test() {
@@ -35,12 +37,8 @@ public class TaskController {
         return true;
     }
 
-    /**
-     *
-     * @return
-     */
-    public List<Task> loadTasks(Date date) {
-        List<Task> tasks = taskRepository.findTasks(currentUser.getId(), date);
-        return tasks;
+    @RequestMapping("update/{date}")
+    public @ResponseBody List<Task> loadTasks(@PathVariable Date date) {
+        return taskRepository.findTasks(getCurrentUser().getId(), date);
     }
 }

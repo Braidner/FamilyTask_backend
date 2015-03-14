@@ -1,10 +1,10 @@
 package com.smith.familytask.model;
 
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 /**
  * @author Nick Smith
@@ -27,14 +27,20 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String name;
 
+    @ManyToMany
+    private List<Task> tasks;
+
+    @ManyToMany
+    private List<Role> roles;
+
     @PrePersist
     public void init() {
         if (login != null) login = login.toLowerCase();
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+    public Collection<Role> getAuthorities() {
+        return roles;
     }
 
     public String getPassword() {
@@ -92,5 +98,21 @@ public class User implements UserDetails {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Task> getTasks() {
+        return tasks;
+    }
+
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }
