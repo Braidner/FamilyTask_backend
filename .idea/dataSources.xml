@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DataSourceManagerImpl" format="xml" hash="1450328260">
+    <data-source source="LOCAL" name="PostgreSQL - family_task@localhost" uuid="ef7aab9a-da84-493d-8ad1-3e941b2cda95">
+      <driver-ref>postgresql</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>org.postgresql.Driver</jdbc-driver>
+      <jdbc-url>jdbc:postgresql://localhost:5432/family_task</jdbc-url>
+      <libraries />
+    </data-source>
+  </component>
+</project>
