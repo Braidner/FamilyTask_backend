@@ -27,10 +27,14 @@ public class User implements UserDetails {
     @Column(name = "name")
     private String name;
 
-    @ManyToMany
+    @Transient
     private List<Task> tasks;
 
     @ManyToMany
+    @JoinTable(name = "t_user_role",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "role_id")}
+    )
     private List<Role> roles;
 
     @PrePersist
