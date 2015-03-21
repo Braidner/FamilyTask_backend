@@ -1,5 +1,8 @@
 package com.smith.familytask.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
@@ -11,6 +14,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "t_user")
+@JsonIdentityInfo(generator=ObjectIdGenerators.IntSequenceGenerator.class, property="@id")
 public class User implements UserDetails {
 
     @Id
@@ -22,14 +26,17 @@ public class User implements UserDetails {
     private String login;
 
     @Column(name = "password")
+    @JsonIgnore
     private String password;
 
     @Column(name = "name")
     private String name;
 
-    @Transient
+    @OneToMany
+    @JoinColumn(name = "assignee")
     private List<Task> tasks;
 
+    @JsonIgnore
     @ManyToMany
     @JoinTable(name = "t_user_role",
             joinColumns = {@JoinColumn(name = "user_id")},
@@ -43,6 +50,7 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public Collection<Role> getAuthorities() {
         return roles;
     }
@@ -57,21 +65,25 @@ public class User implements UserDetails {
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isAccountNonLocked() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
     @Override
+    @JsonIgnore
     public boolean isEnabled() {
         return true;
     }

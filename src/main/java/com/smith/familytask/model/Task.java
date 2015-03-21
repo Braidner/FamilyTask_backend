@@ -13,7 +13,7 @@ import java.util.Date;
 @Entity
 @FilterDefs({
         @FilterDef(name = Task.ASSIGNEE_FILTER, parameters = @ParamDef(name = "id", type = "long")),
-        @FilterDef(name = Task.UPDATE_FILTER, parameters = @ParamDef(name = "updateDate", type = "date"))
+        @FilterDef(name = Task.UPDATE_FILTER, parameters = @ParamDef(name = "date", type = "date"))
 })
 @Filters({
         @Filter(name = Task.ASSIGNEE_FILTER, condition = "assignee.id = :id"),
