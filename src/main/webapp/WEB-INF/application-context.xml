@@ -17,9 +17,8 @@
     <mvc:annotation-driven>
         <mvc:message-converters>
             <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
-                <property name="objectMapper">
-                    <bean class="com.smith.familytask.mapper.HibernateAwareObjectMapper"/>
-                </property>
+                <property name="objectMapper" ref="hibernateMapper"/>
+                <property name="prettyPrint" value="true"/>
             </bean>
         </mvc:message-converters>
     </mvc:annotation-driven>
